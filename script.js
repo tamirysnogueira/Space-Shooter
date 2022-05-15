@@ -3,11 +3,14 @@ const playArea = document.querySelector('#main-play-area')
 const monsterImg = ['imgs/monsterAirplane.png', 'imgs/monsterAirplane2.png']
 const instructionsText = document.querySelector('.game-instructions')
 const startButton = document.querySelector('.start-button')
+const scoreText = document.getElementById('score')
 
 const laserSound = document.getElementById('laserSound')
 const explosionSound = document.getElementById('explosionSound')
 const backgroundSound = document.getElementById('backgroundSound')
 const gameOverSound = document.getElementById('gameOverSound')
+
+let score = 0
 let monsterInterval;
 
 //Movimento e tiro da nave
@@ -86,6 +89,9 @@ function moveLaser(laser){
                 monster.src = 'imgs/explosion.png'
                 monster.classList.remove('monster')
                 monster.classList.add('dead-monster')
+
+                score += 1
+                scoreText.innerHTML = `Seu score: ${score}`
             }
         });
         
@@ -173,6 +179,8 @@ function gameOver() {
     window.removeEventListener('keydown', flyShip)
     backgroundSound.pause()
     backgroundSound.currentTime = 0
+    score = 0
+    scoreText.innerHTML = `Seu score: ${score}`
     clearInterval(monsterInterval)
     let monsters = document.querySelectorAll('.monster')
     monsters.forEach((monster) => monster.remove())
