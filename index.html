@@ -8,40 +8,69 @@
     <title>Shooter</title>
 </head>
 <body>
-    <div id="main-play-area">
-        <img class="player-shooter" src="imgs/airplane.png" alt="hero">
-        <h4 class="game-instructions">
-            Não deixe os monstros invadirem!
-        </h4>
 
-        <div class="start-button">
-            <h1>START</h1>
+    <div id="main">
+        <div id="startMenu">
+            <img src="src/imgs/playArea/name.png" alt="" id="invaiders">
+
+            <div id="buttons">
+                <button onclick="start()">START</button>
+                
+                <button onclick="start()">OPTIONS</button>
+            </div>
         </div>
 
-        <div id="container">
-            <h1 id="score">Seu score = 0</h1>
-        </div>
-    </div>
+        <div id="selectShip">
+            <h1>Selecione a nave que irá combater os invasores:</h1>
 
+            <div id="containerShips">
+                <div class="ships">
+                    <img src="src/imgs/playArea/airplane.png" alt="" id="airplaine1" onclick="ship(this)">
+                </div>
+
+                <div class="ships">
+                    <img src="src/imgs/playArea/airplane2.png" alt="" id="airplaine2" onclick="ship(this)">
+                </div>
+            </div>
+        </div>
+
+        <div id="main-play-area">
+            <div id="settings">
+                <div id="containerScore">
+                    <h1 id="score">Seu score = 0</h1>
+                </div>
+                
+                <div id="containerConfig">
     
+                </div>
+            </div>
+            
+            <img class="player-shooter" src="src/imgs/playArea/airplane.png" alt="hero">
+        </div>
+
+    </div>
+        
+    
+
     <div id="sounds">
-        <audio id="backgroundSound">
-            <source src="sounds/background.mp3" type="audio/mp3">
-        </audio>
+        <!-- <audio id="backgroundSound" autoplay>
+            <source src="src/sounds/background.mp3" type="audio/mp3">
+        </audio> -->
     
         <audio id="laserSound">
-            <source src="sounds/laser.mp3">
+            <source src="src/sounds/laser.mp3" type="audio/mp3">
         </audio>
     
         <audio id="explosionSound">
-            <source src="sounds/explosion.mp3">
+            <source src="src/sounds/explosion.mp3" type="audio/mp3">
         </audio>
 
         <audio id="gameOverSound">
-            <source src="sounds/game over.mp3">
+            <source src="src/sounds/game over.mp3" type="audio/mp3">
         </audio>
     </div>
     
-    <script src="script.js"></script>
+    <script src="functions/game.js"></script>
+    <script src="functions/menu.js"></script>
 </body>
 </html>
