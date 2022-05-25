@@ -13,20 +13,8 @@ const gameOverSound = document.getElementById('gameOverSound')
 
 let score = 0
 let monsterInterval;
+let moveMonsterInterval;
 let choseShip = ''
-
-
-//função para mudar a imagem da nave e ir para a próxima tela
-function ship(ship){
-    if(ship.id === 'airplaine1'){
-        yourShip.src = 'src/imgs/playArea/airplane.png'
-    } else {
-        yourShip.src = 'src/imgs/playArea/airplane2.png'
-    }
-
-    selectShip.style.display = 'none'
-    playArea.style.display = 'block'
-}
 
 //Movimento e tiro da nave
 function flyShip(event){
@@ -45,7 +33,8 @@ function flyShip(event){
 //função de subir
 function moveUp() {
     let topPosition = getComputedStyle(yourShip).getPropertyValue('top') //traz o valor do css como string
-    if(topPosition === '150px'){
+    
+    if(topPosition === '70px'){
         return
     } else {
         let position = parseInt(topPosition)
@@ -58,7 +47,7 @@ function moveUp() {
 // função de ir para esquerda
 function moveDown() {
     let topPosition = getComputedStyle(yourShip).getPropertyValue('top') //traz o valor do css como string
-    if(topPosition === '650px'){
+    if(topPosition === '530px'){
         return
     } else {
         let position = parseInt(topPosition)
@@ -94,19 +83,25 @@ function moveLaser(laser){
     let laserInterval = setInterval(() => {
         let xPosition = parseInt(laser.style.left)
         let monsters = document.querySelectorAll('.monster')
-        
-
        
         monsters.forEach((monster) => { //comparando se cada alien foi atingido, se sim, troca o src da img
             if(checkLaserCollision(laser, monster)){
                 laser.remove()
                 explosionSound.play()
+
+                if(monster.getAttribute('src') === 'src/imgs/playArea/monsterAirplane.png'){
+                    score += 15
+                } else {
+                    score += 25
+                }
+
+
                 monster.src = 'src/imgs/playArea/explosion.png'
                 monster.classList.remove('monster')
                 monster.classList.add('dead-monster')
 
-                score += 1
-                scoreText.innerHTML = `Seu score: ${score}`
+                
+                scoreText.innerHTML = `${score}`
             }
         });
         
@@ -126,8 +121,8 @@ function createMonsters() {
     newMonster.src = monsterSprite
     newMonster.classList.add('monster')
     newMonster.classList.add('monster-transition')
-    newMonster.style.left = '725px'
-    newMonster.style.top = `${Math.floor(Math.random() * (650 - 150)) + 150}px`
+    newMonster.style.left = '825px'
+    newMonster.style.top = `${Math.floor(Math.random() * (530 - 170)) + 170}px`
     
     playArea.appendChild(newMonster)
     moveMonster(newMonster)
@@ -135,7 +130,7 @@ function createMonsters() {
 
 //função para movimentar inimigos 
 function moveMonster(monster){
-    let moveMonsterInterval = setInterval(() => {
+    moveMonsterInterval = setInterval(() => {
         let xPosition = parseInt(window.getComputedStyle(monster).getPropertyValue('left'))
         if(xPosition <= 101) {
             if(Array.from(monster.classList).includes('dead-monster')) {
@@ -156,14 +151,11 @@ function checkLaserCollision(laser, monster){
 
     let monsterTop = parseInt(monster.style.top)
     let monsterLeft = parseInt(monster.style.left)
-    //o laser tem que acertar dentro do tamanho do monstro, que é de 60px
-    let monsterBottom = monsterTop - 60
+    //o laser tem que acertar dentro do tamanho do monstro, que é de 190px
 
-    // console.log(monsterBottom) - 199
-    // console.log(monsterTop) - 259
-    // console.log(laserTop) - 205
+    let monsterBottom = monsterTop - 190 
 
-    //o laser não pode ultrapassar o limite de 340 e se o laser ultrapassou o monstro
+    //o laser não pode ultrapassar o limite de 660 e se o laser ultrapassou o monstro
     if(laserLeft != 660 && laserLeft >= monsterLeft) {
         if(laserTop <= monsterTop && laserTop >= monsterBottom) {
             return true
@@ -175,14 +167,9 @@ function checkLaserCollision(laser, monster){
     }
 }
 
-startButton.addEventListener('click', () => {
-    backgroundSound.play()
-    playGame()
-})
-
 function playGame() {
-    startButton.style.display = 'none'
-    instructionsText.style.display = 'none'
+    containerGameOver.style.display = 'none'
+    backgroundSound.play()
     window.addEventListener('keydown', flyShip)
     monsterInterval = setInterval(() => {
         createMonsters()
@@ -191,22 +178,17 @@ function playGame() {
 
 //função de game over
 function gameOver() {
-    gameOverSound.play()
     window.removeEventListener('keydown', flyShip)
-    backgroundSound.pause()
-    backgroundSound.currentTime = 0
+    
     score = 0
-    scoreText.innerHTML = `Seu score: ${score}`
+    scoreText.innerHTML = `${score}`
+
     clearInterval(monsterInterval)
+
     let monsters = document.querySelectorAll('.monster')
     monsters.forEach((monster) => monster.remove())
     let lasers = document.querySelectorAll('.laser')
     lasers.forEach((laser) => laser.remove())
 
-    setTimeout(() => {
-        alert('Game Over!')
-        yourShip.style.top = '350px'
-        startButton.style.display = 'block'
-        instructionsText.style.display = 'block'
-    });
+    gameOverScreen()
 }

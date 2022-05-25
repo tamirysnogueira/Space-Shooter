@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Shooter</title>
+    <title>Invaiders</title>
 </head>
 <body>
 
@@ -15,8 +15,6 @@
 
             <div id="buttons">
                 <button onclick="start()">START</button>
-                
-                <button onclick="start()">OPTIONS</button>
             </div>
         </div>
 
@@ -35,27 +33,55 @@
         </div>
 
         <div id="main-play-area">
+
             <div id="settings">
                 <div id="containerScore">
-                    <h1 id="score">Seu score = 0</h1>
+                    <h1 id="score">0</h1>
                 </div>
-                
-                <div id="containerConfig">
+
+                <div id="monsterPoints">
+                    <div class="monsters">
+                        <img src="src/imgs/playArea/monsterAirplane.png" alt="">
+                        <span>=</span>
+                        <span>15 points</span>
+                    </div>
+
+                    <div class="monsters">
+                        <img src="src/imgs/playArea/monsterAirplane2.png" alt="">
+                        <span>=</span>
+                        <span>25 points</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gameOver">
+                <h1>Game Over!</h1>
     
+                <div id="buttonsGameOver">
+                    <button>
+                        <img src="src/imgs/config/replay.png" alt="" onclick="playGame()">
+                    </button>
+                    
+                    <button>
+                        <img src="src/imgs/config/home.png" alt="" onclick="home()">
+                    </button>
+                    
                 </div>
             </div>
             
             <img class="player-shooter" src="src/imgs/playArea/airplane.png" alt="hero">
         </div>
 
+        
+
     </div>
         
     
 
     <div id="sounds">
-        <!-- <audio id="backgroundSound" autoplay>
+        <audio id="backgroundSound">
             <source src="src/sounds/background.mp3" type="audio/mp3">
-        </audio> -->
+        </audio>
     
         <audio id="laserSound">
             <source src="src/sounds/laser.mp3" type="audio/mp3">
