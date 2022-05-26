@@ -26,7 +26,7 @@
 
 ### Vercel
 Aqui você pode visualizar o projeto, é só clicar em:
-[Wakizash](https://spaceShooter.vercel.app/)
+[Invaiders](https://invaiders.vercel.app/)
 
 <br>
 
