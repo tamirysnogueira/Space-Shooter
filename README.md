@@ -10,7 +10,7 @@
 </h4>
 <br>
 <p align="center">
-    <video src="github/spaceShooter.mp4" width="1000px" autoplay loop></video>
+    <img src="github/spaceShooter.gif" width="1000px">
 </p>
 <br>
 
