@@ -168,8 +168,13 @@ function checkLaserCollision(laser, monster){
 }
 
 function playGame() {
+    gameOverSound.pause()
+    gameOverSound.currentTime = 0
+
     containerGameOver.style.display = 'none'
+
     backgroundSound.play()
+    
     window.addEventListener('keydown', flyShip)
     monsterInterval = setInterval(() => {
         createMonsters()

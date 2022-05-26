@@ -41,6 +41,9 @@ function gameOverScreen(){
 //função para voltar a tela home
 
 function home() {
+    gameOverSound.pause()
+    gameOverSound.currentTime = 0
+    
     containerGameOver.style.display = 'none'
     playArea.style.display = 'none'
     startMenu.style.display = 'flex'
