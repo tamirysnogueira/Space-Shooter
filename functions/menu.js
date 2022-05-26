@@ -25,6 +25,8 @@ function ship(ship){
     playGame()
 }
 
+//função da tela de game over
+
 function gameOverScreen(){
     gameOverSound.play()
 
@@ -35,6 +37,8 @@ function gameOverScreen(){
 
     yourShip.style.top = '250px'
 }
+
+//função para voltar a tela home
 
 function home() {
     containerGameOver.style.display = 'none'

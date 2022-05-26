@@ -44,7 +44,7 @@ function moveUp() {
     
 }
 
-// função de ir para esquerda
+// função de ir para baixo
 function moveDown() {
     let topPosition = getComputedStyle(yourShip).getPropertyValue('top') //traz o valor do css como string
     if(topPosition === '530px'){
